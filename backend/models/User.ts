@@ -1,3 +1,5 @@
+//* Name of the collection is users !!!
+
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
