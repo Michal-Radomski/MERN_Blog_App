@@ -41,7 +41,7 @@ export const updateBlog = async (req: Request, res: Response) => {
   const {title, description, image} = req.body;
   // console.log({title}, {description}, {image});
   const blogId = req.params.id;
-  // console.log({blogId});
+  console.log({blogId});
   let blog;
   try {
     blog = await Blog.findByIdAndUpdate(blogId, {
@@ -49,13 +49,28 @@ export const updateBlog = async (req: Request, res: Response) => {
       description: description,
       image: image,
     });
-
     // console.log({blog});
   } catch (error) {
     return console.log({error});
   }
   if (!blog) {
     return res.status(500).json({message: "Unable To Update The Blog"});
+  }
+  return res.status(200).json({blog: blog});
+};
+
+export const getBlogById = async (req: Request, res: Response) => {
+  console.log("req.ip - getBlogById:", req.ip);
+  const blogId = req.params.id;
+  console.log({blogId});
+  let blog;
+  try {
+    blog = await Blog.findById(blogId);
+  } catch (error) {
+    console.log({error});
+  }
+  if (!blog) {
+    return res.status(404).json({message: "No Blog Found"});
   }
   return res.status(200).json({blog: blog});
 };

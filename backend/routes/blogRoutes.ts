@@ -1,6 +1,6 @@
 import express from "express";
 
-import {getAllBlogs, addBlog, updateBlog} from "../controllers/blogController";
+import {getAllBlogs, addBlog, updateBlog, getBlogById} from "../controllers/blogController";
 
 const blogRouter = express.Router();
 
@@ -14,6 +14,10 @@ blogRouter.post("/add", addBlog, (req, _res) => {
 
 blogRouter.put("/update/:id", updateBlog, (req, _res) => {
   console.log("req.ip - updateBlog:", req.ip);
+});
+
+blogRouter.get("/:id", getBlogById, (req, _res) => {
+  console.log("req.ip - getBlogById:", req.ip);
 });
 
 export default blogRouter;
