@@ -33,7 +33,7 @@ export const signUp = async (req: Request, res: Response) => {
   const hashedPassword = bcrypt.hashSync(password, salt);
   const user = new User({name: name, email: email, password: hashedPassword});
   try {
-    user.save();
+    await user.save();
   } catch (error) {
     console.error({error});
   }
