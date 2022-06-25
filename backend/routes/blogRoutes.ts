@@ -1,6 +1,6 @@
 import express from "express";
 
-import {getAllBlogs, addBlog, updateBlog, getBlogById} from "../controllers/blogController";
+import {getAllBlogs, addBlog, updateBlog, getBlogById, deleteBlogById} from "../controllers/blogController";
 
 const blogRouter = express.Router();
 
@@ -18,6 +18,10 @@ blogRouter.put("/update/:id", updateBlog, (req, _res) => {
 
 blogRouter.get("/:id", getBlogById, (req, _res) => {
   console.log("req.ip - getBlogById:", req.ip);
+});
+
+blogRouter.delete("/:id", deleteBlogById, (req, _res) => {
+  console.log("req.ip - deleteBlogById:", req.ip);
 });
 
 export default blogRouter;

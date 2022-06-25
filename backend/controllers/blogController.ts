@@ -74,3 +74,19 @@ export const getBlogById = async (req: Request, res: Response) => {
   }
   return res.status(200).json({blog: blog});
 };
+
+export const deleteBlogById = async (req: Request, res: Response) => {
+  console.log("req.ip - deleteBlogById:", req.ip);
+  const blogId = req.params.id;
+  console.log({blogId});
+  let blog;
+  try {
+    blog = await Blog.findByIdAndRemove(blogId);
+  } catch (error) {
+    console.log({error});
+  }
+  if (!blog) {
+    return res.status(404).json({message: "Unable To Delete"});
+  }
+  return res.status(200).json(`Blog: ${blog} Successfully Deleted`);
+};
