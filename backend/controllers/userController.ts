@@ -1,4 +1,5 @@
 import {Response, Request} from "express";
+import bcrypt from "bcryptjs";
 
 import User from "../models/User";
 
@@ -18,9 +19,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const signUp = async (req: Request, res: Response) => {
   const {name, email, password} = req.body;
-
   let existingUser;
-
   try {
     existingUser = await User.findOne({email: email});
   } catch (error) {
@@ -29,13 +28,32 @@ export const signUp = async (req: Request, res: Response) => {
   if (existingUser) {
     return res.status(400).json({message: "User Already Exists! Login Instead"});
   }
-
-  const user = new User({name: name, email: email, password: password});
-
+  const salt = bcrypt.genSaltSync(10);
+  // console.log({salt});
+  const hashedPassword = bcrypt.hashSync(password, salt);
+  const user = new User({name: name, email: email, password: hashedPassword});
   try {
     user.save();
   } catch (error) {
     console.error({error});
   }
   res.status(200).json({message: `User: ${user}`});
+};
+
+export const login = async (req: Request, res: Response) => {
+  const {email, password} = req.body;
+  let existingUser;
+  try {
+    existingUser = await User.findOne({email: email});
+  } catch (error) {
+    console.error({error});
+  }
+  if (!existingUser) {
+    return res.status(400).json({message: "Couldn't Find User By This Email! Change Email Or SignUp Instead"});
+  }
+  const isPasswordCorrect: boolean = bcrypt.compareSync(password, existingUser.password);
+  if (!isPasswordCorrect) {
+    return res.status(400).json({message: "Incorrect Password"});
+  }
+  return res.status(200).json({message: "Login Successful"});
 };
