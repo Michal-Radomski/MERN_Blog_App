@@ -37,14 +37,20 @@ export const addBlog = async (req: Request, res: Response) => {
 };
 
 export const updateBlog = async (req: Request, res: Response) => {
-  const {title, description} = req.body;
+  console.log("req.ip: - updateBlog", req.ip);
+  const {title, description, image} = req.body;
+  // console.log({title}, {description}, {image});
   const blogId = req.params.id;
+  // console.log({blogId});
   let blog;
   try {
     blog = await Blog.findByIdAndUpdate(blogId, {
       title: title,
       description: description,
+      image: image,
     });
+
+    // console.log({blog});
   } catch (error) {
     return console.log({error});
   }
