@@ -1,10 +1,9 @@
 //* Name of the collection is blogs !!!
 
-import mongoose from "mongoose";
+import mongoose, {Schema, Model} from "mongoose";
+import {Blog} from "../Interfaces";
 
-const Schema = mongoose.Schema;
-
-const blogSchema = new Schema({
+const blogSchema = new Schema<Blog, Model<Blog>>({
   title: {
     type: String,
     required: true,

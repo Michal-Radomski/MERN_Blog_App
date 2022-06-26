@@ -102,7 +102,13 @@ export const deleteBlogById = async (req: Request, res: Response) => {
   console.log({blogId});
   let blog: typeof Blog | null;
   try {
-    blog = await Blog.findByIdAndRemove(blogId);
+    blog = await Blog.findByIdAndRemove(blogId).populate("user");
+    if (blog) {
+      // @ts-ignore
+      await blog.user.blogs.pull(blog);
+      // @ts-ignore
+      await blog.user.save();
+    }
   } catch (error) {
     console.log({error});
   }

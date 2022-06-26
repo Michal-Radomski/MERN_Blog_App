@@ -1,8 +1,9 @@
 //* Name of the collection is users !!!
 
-import mongoose from "mongoose";
+import mongoose, {Schema, Model} from "mongoose";
+import {User} from "../Interfaces";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema<User, Model<User>>({
   name: {
     type: String,
     required: true,
