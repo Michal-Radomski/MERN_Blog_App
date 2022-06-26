@@ -13,7 +13,7 @@ export const getAllBlogs = async (req: Request, res: Response) => {
     console.log({error});
     throw new Error();
   } finally {
-    console.log("Good Job!");
+    console.log("Good Job! - blogController");
   }
   if (!blogs) {
     return res.status(404).json({message: "No Blogs Found"});
@@ -116,4 +116,24 @@ export const deleteBlogById = async (req: Request, res: Response) => {
     return res.status(404).json({message: "Unable To Delete"});
   }
   return res.status(200).json(`Blog: ${blog} Successfully Deleted`);
+};
+
+export const getBlogsByUserId = async (req: Request, res: Response) => {
+  console.log("req.ip - getBlogsByUserId:", req.ip);
+
+  const userId = req.params.id;
+  console.log({userId});
+
+  let userBlogs: string[] | string | null;
+
+  try {
+    userBlogs = await User.findById(userId).populate("blogs");
+  } catch (error) {
+    console.log({error});
+  }
+  if (!userBlogs!) {
+    return res.status(404).json({message: "No Blogs Found of This User"});
+  }
+
+  return res.status(200).json({blogs: userBlogs});
 };

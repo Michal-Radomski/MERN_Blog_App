@@ -10,6 +10,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
     users = await User.find();
   } catch (error) {
     console.error({error});
+  } finally {
+    console.log("Good Job! - userController");
   }
   if (!users!) {
     return res.status(404).json({message: "No Users found"});
