@@ -31,7 +31,7 @@ export const signUp = async (req: Request, res: Response) => {
   const salt = bcrypt.genSaltSync(10);
   // console.log({salt});
   const hashedPassword = bcrypt.hashSync(password, salt);
-  const user = new User({name: name, email: email, password: hashedPassword});
+  const user = new User({name: name, email: email, password: hashedPassword, blogs: []});
   try {
     await user.save();
   } catch (error) {

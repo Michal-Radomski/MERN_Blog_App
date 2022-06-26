@@ -1,6 +1,8 @@
 import {Request, Response} from "express";
+import mongoose from "mongoose";
 
 import Blog from "../models/Blog";
+import User from "../models/User";
 
 export const getAllBlogs = async (req: Request, res: Response) => {
   console.log("req.ip: - getAllBlogs", req.ip);
@@ -22,6 +24,16 @@ export const getAllBlogs = async (req: Request, res: Response) => {
 export const addBlog = async (req: Request, res: Response) => {
   console.log("req.ip: - addBlog", req.ip);
   const {title, description, image, user} = req.body;
+  let existingUser;
+  try {
+    existingUser = await User.findById(user);
+  } catch (error) {
+    return console.log({error});
+  }
+
+  if (!existingUser) {
+    return res.status(400).json({message: "Unable To Find User By This ID"});
+  }
   const blog = new Blog({
     title: title,
     description: description,
@@ -29,9 +41,15 @@ export const addBlog = async (req: Request, res: Response) => {
     user: user,
   });
   try {
-    await blog.save();
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    await blog.save({session});
+    existingUser.blogs?.push(blog);
+    await existingUser.save({session});
+    await session.commitTransaction();
   } catch (error) {
     console.log({error});
+    return res.status(500).json({message: error});
   }
   return res.status(200).json({blog: blog});
 };
