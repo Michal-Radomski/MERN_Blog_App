@@ -1,13 +1,15 @@
 // Types end Interfaces
 
-export interface User extends mongoose.Document {
+import {Document} from "mongoose";
+
+export interface User extends Document {
   name: string;
   email: string;
   password: string;
   blogs: string[] | string | [] | null;
 }
 
-export interface Blog extends mongoose.Document {
+export interface Blog extends Document {
   title: string;
   description: string;
   image: string;
