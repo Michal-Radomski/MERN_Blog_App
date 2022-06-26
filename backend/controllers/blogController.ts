@@ -6,7 +6,7 @@ import User from "../models/User";
 
 export const getAllBlogs = async (req: Request, res: Response) => {
   console.log("req.ip: - getAllBlogs", req.ip);
-  let blogs;
+  let blogs: typeof Blog[];
   try {
     blogs = await Blog.find();
   } catch (error) {
@@ -24,7 +24,7 @@ export const getAllBlogs = async (req: Request, res: Response) => {
 export const addBlog = async (req: Request, res: Response) => {
   console.log("req.ip: - addBlog", req.ip);
   const {title, description, image, user} = req.body;
-  let existingUser;
+  let existingUser: typeof User | null;
   try {
     existingUser = await User.findById(user);
   } catch (error) {
@@ -44,7 +44,10 @@ export const addBlog = async (req: Request, res: Response) => {
     const session = await mongoose.startSession();
     session.startTransaction();
     await blog.save({session});
+
+    // @ts-ignore
     existingUser.blogs?.push(blog);
+    // @ts-ignore
     await existingUser.save({session});
     await session.commitTransaction();
   } catch (error) {
@@ -60,7 +63,7 @@ export const updateBlog = async (req: Request, res: Response) => {
   // console.log({title}, {description}, {image});
   const blogId = req.params.id;
   console.log({blogId});
-  let blog;
+  let blog: typeof Blog | null;
   try {
     blog = await Blog.findByIdAndUpdate(blogId, {
       title: title,
@@ -81,13 +84,13 @@ export const getBlogById = async (req: Request, res: Response) => {
   console.log("req.ip - getBlogById:", req.ip);
   const blogId = req.params.id;
   console.log({blogId});
-  let blog;
+  let blog: typeof Blog | null;
   try {
     blog = await Blog.findById(blogId);
   } catch (error) {
     console.log({error});
   }
-  if (!blog) {
+  if (!blog!) {
     return res.status(404).json({message: "No Blog Found"});
   }
   return res.status(200).json({blog: blog});
@@ -97,13 +100,13 @@ export const deleteBlogById = async (req: Request, res: Response) => {
   console.log("req.ip - deleteBlogById:", req.ip);
   const blogId = req.params.id;
   console.log({blogId});
-  let blog;
+  let blog: typeof Blog | null;
   try {
     blog = await Blog.findByIdAndRemove(blogId);
   } catch (error) {
     console.log({error});
   }
-  if (!blog) {
+  if (!blog!) {
     return res.status(404).json({message: "Unable To Delete"});
   }
   return res.status(200).json(`Blog: ${blog} Successfully Deleted`);

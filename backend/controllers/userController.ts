@@ -5,13 +5,13 @@ import User from "../models/User";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   console.log("req.ip - userController:", req.ip);
-  let users;
+  let users: typeof User[];
   try {
     users = await User.find();
   } catch (error) {
     console.error({error});
   }
-  if (!users) {
+  if (!users!) {
     return res.status(404).json({message: "No Users found"});
   }
   return res.status(200).json({users: users});
@@ -19,13 +19,13 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const signUp = async (req: Request, res: Response) => {
   const {name, email, password} = req.body;
-  let existingUser;
+  let existingUser: typeof User | null;
   try {
     existingUser = await User.findOne({email: email});
   } catch (error) {
     console.error({error});
   }
-  if (existingUser) {
+  if (existingUser!) {
     return res.status(400).json({message: "User Already Exists! Login Instead"});
   }
   const salt = bcrypt.genSaltSync(10);
@@ -41,16 +41,18 @@ export const signUp = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  const {email, password} = req.body;
-  let existingUser;
+  const {email, password}: {email: string; password: string} = req.body;
+  let existingUser: typeof User | null;
   try {
     existingUser = await User.findOne({email: email});
   } catch (error) {
     console.error({error});
   }
-  if (!existingUser) {
+  if (!existingUser!) {
     return res.status(400).json({message: "Couldn't Find User By This Email! Change Email Or SignUp Instead"});
   }
+
+  // @ts-ignore
   const isPasswordCorrect: boolean = bcrypt.compareSync(password, existingUser.password);
   if (!isPasswordCorrect) {
     return res.status(400).json({message: "Incorrect Password"});
