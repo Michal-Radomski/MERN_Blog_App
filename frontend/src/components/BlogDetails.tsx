@@ -3,7 +3,7 @@ import React from "react";
 const BlogDetails = () => {
   return (
     <React.Fragment>
-      <div>BlogDetails</div>;
+      <div>BlogDetails</div>
     </React.Fragment>
   );
 };

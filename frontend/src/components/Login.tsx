@@ -3,7 +3,7 @@ import React from "react";
 const Login = () => {
   return (
     <React.Fragment>
-      <div>Login</div>;
+      <div>Login</div>
     </React.Fragment>
   );
 };
