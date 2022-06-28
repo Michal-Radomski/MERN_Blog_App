@@ -1,10 +1,12 @@
 import React from "react";
 import {AppBar, Toolbar, Typography, Box, Button, Tabs, Tab} from "@mui/material";
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {State} from "../redux/store";
+import {useDispatch, useSelector} from "react-redux";
+import {authActions, State} from "../redux/store";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
   const isLoggedIn = useSelector((state: State) => state.isLoggedIn);
   console.log({isLoggedIn});
 
@@ -62,6 +64,7 @@ const Header = () => {
             )}
             {isLoggedIn && (
               <Button
+                onClick={() => dispatch(authActions.logout())}
                 sx={{margin: 1, borderRadius: 10, backgroundColor: "lightyellow"}}
                 color="info"
                 variant="outlined"

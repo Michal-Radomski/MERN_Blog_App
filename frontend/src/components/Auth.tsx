@@ -1,8 +1,16 @@
 import React from "react";
 import {Box, Button, TextField, Typography} from "@mui/material";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+
+import {authActions} from "../redux/store";
 
 const Auth = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   const [inputs, setInputs] = React.useState<Person>({
     name: "",
     email: "",
@@ -19,9 +27,10 @@ const Auth = () => {
     }));
   };
 
-  const sendRequest = async () => {
+  const sendRequest = async (type = "login") => {
     const response = await axios
-      .post("http://localhost:5000/api/user/login", {
+      .post(`http://localhost:5000/api/user/${type}`, {
+        name: inputs.name,
         email: inputs.email,
         password: inputs.password,
       })
@@ -34,7 +43,17 @@ const Auth = () => {
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     console.log({inputs});
-    sendRequest();
+    if (isSignUp) {
+      sendRequest("signup")
+        .then(() => dispatch(authActions.login()))
+        .then(() => navigate("/blogs"))
+        .then((data) => console.log({data}));
+    } else {
+      sendRequest()
+        .then(() => dispatch(authActions.login()))
+        .then(() => navigate("/blogs"))
+        .then((data) => console.log({data}));
+    }
   };
 
   return (
@@ -61,7 +80,7 @@ const Auth = () => {
             }}
           >
             <Typography padding={3} textAlign={"center"} variant="h3">
-              {isSignUp ? "LogIn" : "SignUp"}
+              {isSignUp ? "SignUp" : "LogIn"}
             </Typography>
             {isSignUp && (
               <TextField
