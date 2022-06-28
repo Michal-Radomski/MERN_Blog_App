@@ -19,13 +19,22 @@ const Auth = () => {
     }));
   };
 
-  // const sendRequest = async()=>{
-  //   axios.post("")
-  // }
+  const sendRequest = async () => {
+    const response = await axios
+      .post("http://localhost:5000/api/user/login", {
+        email: inputs.email,
+        password: inputs.password,
+      })
+      .catch((error: string) => console.log({error}));
+
+    const data = await response?.data;
+    return data;
+  };
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     console.log({inputs});
+    sendRequest();
   };
 
   return (
