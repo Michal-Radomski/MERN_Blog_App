@@ -5,13 +5,16 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --experimentalSpecifierResolution node app.ts"
+    "server": "nodemon --experimentalSpecifierResolution node app.ts",
+    "client": "BROWSER=NONE npm start --prefix ../frontend/",
+    "dev": "clear && concurrently \"npm run server\"  \"npm run client\""
   },
   "keywords": [],
   "author": "MR",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^7.2.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongoose": "^6.4.0",

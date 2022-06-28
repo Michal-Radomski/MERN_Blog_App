@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
   res.send("<h1>Hello World!</h1>");
 });
 
-const port = (process.env.PORT || 3000) as number;
+const port = (process.env.PORT || 5000) as number;
 
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);

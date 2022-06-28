@@ -1,5 +1,6 @@
 import React from "react";
 import {Box, Button, TextField, Typography} from "@mui/material";
+import axios from "axios";
 
 const Auth = () => {
   const [inputs, setInputs] = React.useState<Person>({
@@ -9,6 +10,7 @@ const Auth = () => {
   });
 
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
+  // console.log({isSignUp});
 
   const handleChange = (event: {target: {name: string; value: string}}) => {
     setInputs((prevState: Person) => ({
@@ -16,6 +18,10 @@ const Auth = () => {
       [event.target.name]: event.target.value,
     }));
   };
+
+  // const sendRequest = async()=>{
+  //   axios.post("")
+  // }
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
