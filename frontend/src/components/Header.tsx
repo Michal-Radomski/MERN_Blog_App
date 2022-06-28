@@ -1,8 +1,13 @@
 import React from "react";
 import {AppBar, Toolbar, Typography, Box, Button, Tabs, Tab} from "@mui/material";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {State} from "../redux/store";
 
 const Header = () => {
+  const isLoggedIn = useSelector((state: State) => state.isLoggedIn);
+  console.log({isLoggedIn});
+
   const [value, setValue] = React.useState<number>(0);
   // console.log({value});
 
@@ -17,46 +22,55 @@ const Header = () => {
       >
         <Toolbar>
           <Typography variant="h4">MERN BlogApps</Typography>
-          <Box display="flex" marginLeft={"auto"} marginRight={"auto"}>
-            <Tabs
-              value={value}
-              onChange={(_event, value) => {
-                setValue(value);
-              }}
-              textColor="inherit"
-            >
-              <Tab component={Link} to="/blogs" label="All Blogs" style={{fontSize: "105%"}} />
-              <Tab component={Link} to="/myBlogs" label="My Blogs" style={{fontSize: "105%"}} />
-            </Tabs>
-          </Box>
+          {/* //* Render Box if isLoggedIn */}
+          {isLoggedIn && (
+            <Box display="flex" marginLeft={"auto"} marginRight={"auto"}>
+              <Tabs
+                value={value}
+                onChange={(_event, value) => {
+                  setValue(value);
+                }}
+                textColor="inherit"
+              >
+                <Tab component={Link} to="/blogs" label="All Blogs" style={{fontSize: "105%"}} />
+                <Tab component={Link} to="/myBlogs" label="My Blogs" style={{fontSize: "105%"}} />
+              </Tabs>
+            </Box>
+          )}
           <Box display="flex" marginLeft="auto">
-            <Button
-              sx={{margin: 1, borderRadius: 10, backgroundColor: "lightyellow"}}
-              color="info"
-              variant="outlined"
-              component={Link}
-              to="/auth"
-            >
-              LogIn
-            </Button>
-            <Button
-              sx={{margin: 1, borderRadius: 10, backgroundColor: "lightyellow"}}
-              color="info"
-              variant="outlined"
-              component={Link}
-              to="/auth"
-            >
-              SignUp
-            </Button>
-            <Button
-              sx={{margin: 1, borderRadius: 10, backgroundColor: "lightyellow"}}
-              color="info"
-              variant="outlined"
-              component={Link}
-              to="/auth"
-            >
-              LogOut
-            </Button>
+            {!isLoggedIn && (
+              <>
+                <Button
+                  sx={{margin: 1, borderRadius: 10, backgroundColor: "lightyellow"}}
+                  color="info"
+                  variant="outlined"
+                  component={Link}
+                  to="/auth"
+                >
+                  LogIn
+                </Button>
+                <Button
+                  sx={{margin: 1, borderRadius: 10, backgroundColor: "lightyellow"}}
+                  color="info"
+                  variant="outlined"
+                  component={Link}
+                  to="/auth"
+                >
+                  SignUp
+                </Button>
+              </>
+            )}
+            {isLoggedIn && (
+              <Button
+                sx={{margin: 1, borderRadius: 10, backgroundColor: "lightyellow"}}
+                color="info"
+                variant="outlined"
+                component={Link}
+                to="/auth"
+              >
+                LogOut
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
