@@ -5,7 +5,7 @@ import Blog from "./Blog";
 
 const Blogs = (): JSX.Element => {
   const [blogs, setBlogs] = React.useState<Blog[]>([]);
-  console.log({blogs});
+  // console.log({blogs});
 
   const sendRequest = async () => {
     const response = await axios.get("http://localhost:5000/api/blog").catch((error) => console.log({error}));

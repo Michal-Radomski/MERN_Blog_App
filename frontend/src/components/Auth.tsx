@@ -17,7 +17,7 @@ const Auth = (): JSX.Element => {
   });
 
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
-  console.log({isSignUp});
+  // console.log({isSignUp});
 
   const handleChange = (event: {target: {name: string; value: string}}) => {
     setInputs((prevState: Person) => ({
@@ -44,11 +44,13 @@ const Auth = (): JSX.Element => {
     console.log({inputs});
     if (isSignUp) {
       sendRequest("signup")
+        .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
         .then(() => navigate("/blogs"))
         .then((data) => console.log({data}));
     } else {
       sendRequest()
+        .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
         .then(() => navigate("/blogs"))
         .then((data) => console.log({data}));
