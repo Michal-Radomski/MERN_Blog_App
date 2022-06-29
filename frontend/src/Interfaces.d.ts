@@ -5,3 +5,11 @@ interface Person {
   email: string;
   password: string;
 }
+
+interface Blog {
+  user: {name: string};
+  _id: string;
+  title: string;
+  description: string;
+  image: string;
+}

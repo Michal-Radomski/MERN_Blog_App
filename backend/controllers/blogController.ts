@@ -8,7 +8,7 @@ export const getAllBlogs = async (req: Request, res: Response) => {
   console.log("req.ip: - getAllBlogs", req.ip);
   let blogs: typeof Blog[];
   try {
-    blogs = await Blog.find();
+    blogs = await Blog.find().populate("user");
   } catch (error) {
     console.log({error});
     throw new Error();
