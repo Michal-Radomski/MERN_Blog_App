@@ -9,7 +9,7 @@ import Blogs from "./components/Blogs";
 import Header from "./components/Header";
 import UserBlogs from "./components/UserBlogs";
 
-function App() {
+function App(): JSX.Element {
   return (
     <React.Fragment>
       <header>

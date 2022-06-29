@@ -2,12 +2,13 @@ import React from "react";
 import {AppBar, Toolbar, Typography, Box, Button, Tabs, Tab} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {authActions, State} from "../redux/store";
 
-const Header = () => {
-  const dispatch = useDispatch();
+import {authActions, Dispatch, State} from "../redux/store";
 
-  const isLoggedIn = useSelector((state: State) => state.isLoggedIn);
+const Header = (): JSX.Element => {
+  const dispatch: Dispatch = useDispatch();
+
+  const isLoggedIn: boolean = useSelector((state: State) => state.isLoggedIn);
   console.log({isLoggedIn});
 
   const [value, setValue] = React.useState<number>(0);

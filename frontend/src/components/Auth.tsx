@@ -4,12 +4,11 @@ import axios from "axios";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
-import {authActions} from "../redux/store";
+import {authActions, Dispatch} from "../redux/store";
 
-const Auth = () => {
+const Auth = (): JSX.Element => {
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
   const [inputs, setInputs] = React.useState<Person>({
     name: "",
@@ -18,7 +17,7 @@ const Auth = () => {
   });
 
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
-  // console.log({isSignUp});
+  console.log({isSignUp});
 
   const handleChange = (event: {target: {name: string; value: string}}) => {
     setInputs((prevState: Person) => ({

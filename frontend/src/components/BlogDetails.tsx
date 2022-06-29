@@ -1,6 +1,6 @@
 import React from "react";
 
-const BlogDetails = () => {
+const BlogDetails = (): JSX.Element => {
   return (
     <React.Fragment>
       <div>BlogDetails</div>
