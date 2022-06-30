@@ -37,6 +37,7 @@ const Header = (): JSX.Element => {
               >
                 <Tab component={Link} to="/blogs" label="All Blogs" style={{fontSize: "105%"}} />
                 <Tab component={Link} to="/myBlogs" label="My Blogs" style={{fontSize: "105%"}} />
+                <Tab component={Link} to="/blogs/add" label="Add Blog" style={{fontSize: "105%"}} />
               </Tabs>
             </Box>
           )}

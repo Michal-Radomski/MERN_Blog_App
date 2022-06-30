@@ -7,8 +7,8 @@ interface Person {
 }
 
 interface Blog {
-  user: {name: string};
-  _id: string;
+  user?: {name: string};
+  _id?: string;
   title: string;
   description: string;
   image: string;

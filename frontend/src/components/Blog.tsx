@@ -43,6 +43,8 @@ const Blog = ({
         <CardMedia component="img" height="194" image={imageUrl} alt={title} />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
+            <b>{userName}</b>
+            {": "}
             {description}
           </Typography>
         </CardContent>
