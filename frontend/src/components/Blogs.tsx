@@ -5,7 +5,7 @@ import Blog from "./Blog";
 
 const Blogs = (): JSX.Element => {
   const [blogs, setBlogs] = React.useState<Blog[]>([]);
-  // console.log({blogs});
+  console.log({blogs});
 
   const sendRequest = async () => {
     const response = await axios.get("http://localhost:5000/api/blog").catch((error) => console.log({error}));
@@ -24,6 +24,8 @@ const Blogs = (): JSX.Element => {
       {blogs &&
         blogs.map((blog: Blog, index: number) => (
           <Blog
+            id={blog._id!}
+            isUser={localStorage.getItem("userId") === blog?.user?._id}
             key={index}
             title={blog.title}
             description={blog.description}

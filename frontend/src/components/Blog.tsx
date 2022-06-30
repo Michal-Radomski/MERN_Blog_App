@@ -1,22 +1,34 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
+import {Box, CardHeader, Card, Avatar, CardMedia, CardContent, Typography, IconButton} from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import {useNavigate} from "react-router-dom";
 
 const Blog = ({
   title,
   description,
   imageUrl,
   userName,
+  isUser,
+  id,
 }: {
   title: string;
   description: string;
   imageUrl: string;
   userName: string;
+  isUser: boolean;
+  id: string;
 }) => {
+  // console.log({title, isUser});
+
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate(`/myBlogs/${id}`);
+  };
+
+  const handleDelete = (event: any) => {};
+
   return (
     <React.Fragment>
       <Card
@@ -32,6 +44,16 @@ const Blog = ({
           },
         }}
       >
+        {isUser && (
+          <Box display="flex" sx={{marginLeft: "auto"}}>
+            <IconButton sx={{marginLeft: "auto"}} onClick={handleEdit}>
+              <ModeEditOutlineIcon />
+            </IconButton>
+            <IconButton onClick={handleDelete}>
+              <DeleteForeverIcon />
+            </IconButton>
+          </Box>
+        )}
         <CardHeader
           avatar={
             <Avatar sx={{backgroundColor: "blue"}} aria-label="recipe">

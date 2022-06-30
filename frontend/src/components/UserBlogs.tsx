@@ -38,6 +38,8 @@ const UserBlogs = (): JSX.Element => {
         user.blogs &&
         user.blogs.map((blog: Blog, index: number) => (
           <Blog
+            id={blog._id!}
+            isUser={true}
             key={index}
             title={blog.title}
             description={blog.description}
