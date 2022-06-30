@@ -3,13 +3,19 @@ import axios from "axios";
 
 import Blog from "./Blog";
 
+interface User extends Person {
+  blogs: Blog[];
+}
+
 const UserBlogs = (): JSX.Element => {
   const userId: string | null = localStorage.getItem("userId");
 
-  const [myBlogs, setMyBlogs] = React.useState<Blog[]>([]);
-  const [myName, setMyName] = React.useState<string>("");
+  // const [myBlogs, setMyBlogs] = React.useState<Blog[]>([]);
+  // const [myName, setMyName] = React.useState<string>("");
   // console.log({myBlogs});
   // console.log({myName});
+  const [user, setUser] = React.useState<User>();
+  // console.log({user});
 
   React.useEffect(() => {
     const sendRequest = async () => {
@@ -20,21 +26,23 @@ const UserBlogs = (): JSX.Element => {
       return data;
     };
     sendRequest().then((response) => {
-      setMyBlogs(response.blogs.blogs);
-      setMyName(response.blogs.name);
+      // setMyBlogs(response.blogs.blogs);
+      // setMyName(response.blogs.name);
+      setUser(response.user);
     });
   }, [userId]);
 
   return (
     <div>
-      {myBlogs &&
-        myBlogs.map((blog: Blog, index: number) => (
+      {user &&
+        user.blogs &&
+        user.blogs.map((blog: Blog, index: number) => (
           <Blog
             key={index}
             title={blog.title}
             description={blog.description}
             imageUrl={blog.image}
-            userName={myName ?? "Undefined"}
+            userName={user.name ?? "Undefined"}
           />
         ))}
     </div>
