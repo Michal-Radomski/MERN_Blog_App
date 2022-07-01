@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {authActions, Dispatch, State} from "../redux/store";
 import {useStyles} from "./Utils";
 
-const Header = (): JSX.Element => {
+const Header = (props: {isSignUp: boolean; setIsSignUp: (arg0: boolean) => void}): JSX.Element => {
   const classes = useStyles();
   const dispatch: Dispatch = useDispatch();
 
@@ -54,6 +54,7 @@ const Header = (): JSX.Element => {
                   variant="outlined"
                   component={Link}
                   to="/auth"
+                  onClick={() => props.setIsSignUp(false)}
                 >
                   LogIn
                 </Button>
@@ -63,6 +64,7 @@ const Header = (): JSX.Element => {
                   variant="outlined"
                   component={Link}
                   to="/auth"
+                  onClick={() => props.setIsSignUp(true)}
                 >
                   SignUp
                 </Button>

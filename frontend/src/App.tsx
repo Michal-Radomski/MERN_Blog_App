@@ -12,8 +12,10 @@ import UserBlogs from "./components/UserBlogs";
 import {authActions, Dispatch, State} from "./redux/store";
 
 function App(): JSX.Element {
-  const dispatch: Dispatch = useDispatch();
+  const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
+  // console.log({isSignUp});
 
+  const dispatch: Dispatch = useDispatch();
   const isLoggedIn: boolean = useSelector((state: State) => state.isLoggedIn);
   // console.log({isLoggedIn});
 
@@ -26,12 +28,12 @@ function App(): JSX.Element {
   return (
     <>
       <header>
-        <Header />
+        <Header isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
       </header>
       <main>
         <Routes>
           {!isLoggedIn ? (
-            <Route path="/auth" element={<Auth />} />
+            <Route path="/auth" element={<Auth isSignUp={isSignUp} setIsSignUp={setIsSignUp} />} />
           ) : (
             <>
               <Route path="/blogs" element={<Blogs />} />

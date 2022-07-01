@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 
 import {authActions, Dispatch} from "../redux/store";
 
-const Auth = (): JSX.Element => {
+const Auth = ({isSignUp, setIsSignUp}: {isSignUp: boolean; setIsSignUp: (arg0: boolean) => void}): JSX.Element => {
   const navigate = useNavigate();
   const dispatch: Dispatch = useDispatch();
 
@@ -15,9 +15,6 @@ const Auth = (): JSX.Element => {
     email: "",
     password: "",
   });
-
-  const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
-  console.log({isSignUp});
 
   const handleChange = (event: {target: {name: string; value: string}}) => {
     setInputs((prevState: Person) => ({
