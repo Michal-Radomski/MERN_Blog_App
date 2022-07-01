@@ -38,8 +38,8 @@ const Blog = ({
 
   const handleDelete = () => {
     deleteRequest()
-      .then((data) => {
-        // console.log({data});
+      .then((_data) => {
+        // console.log({_data});
       })
       .then(() => navigate("/"))
       .then(() => navigate("/blogs"));
@@ -63,23 +63,26 @@ const Blog = ({
         {isUser && (
           <Box display="flex" sx={{marginLeft: "auto"}}>
             <IconButton sx={{marginLeft: "auto"}} onClick={handleEdit}>
-              <ModeEditOutlineIcon />
+              <ModeEditOutlineIcon color="warning" />
             </IconButton>
             <IconButton onClick={handleDelete}>
-              <DeleteForeverIcon />
+              <DeleteForeverIcon color="error" />
             </IconButton>
           </Box>
         )}
         <CardHeader
           avatar={
-            <Avatar sx={{backgroundColor: "blue"}} aria-label="recipe">
+            <Avatar sx={{backgroundColor: "blue", width: "auto"}} aria-label="avatar" variant="rounded">
               {userName}
             </Avatar>
           }
           title={title}
         />
         <CardMedia component="img" height="194" image={imageUrl} alt={title} />
+
         <CardContent>
+          <hr />
+          <br />
           <Typography variant="body2" color="text.secondary">
             <b>{userName}</b>
             {": "}
