@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import "./App.scss";
 import AddBlog from "./components/AddBlog";
@@ -9,14 +9,22 @@ import BlogDetails from "./components/BlogDetails";
 import Blogs from "./components/Blogs";
 import Header from "./components/Header";
 import UserBlogs from "./components/UserBlogs";
-import {State} from "./redux/store";
+import {authActions, Dispatch, State} from "./redux/store";
 
 function App(): JSX.Element {
+  const dispatch: Dispatch = useDispatch();
+
   const isLoggedIn: boolean = useSelector((state: State) => state.isLoggedIn);
   // console.log({isLoggedIn});
 
+  React.useEffect(() => {
+    if (localStorage.getItem("userId")) {
+      dispatch(authActions.login());
+    }
+  }, [dispatch]);
+
   return (
-    <React.Fragment>
+    <>
       <header>
         <Header />
       </header>
@@ -34,7 +42,7 @@ function App(): JSX.Element {
           )}
         </Routes>
       </main>
-    </React.Fragment>
+    </>
   );
 }
 
