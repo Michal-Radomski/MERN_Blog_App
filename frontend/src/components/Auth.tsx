@@ -46,14 +46,14 @@ const Auth = (): JSX.Element => {
       sendRequest("signup")
         .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/blogs"))
-        .then((data) => console.log({data}));
+        .then(() => navigate("/blogs"));
+      // .then((data) => console.log({data}));
     } else {
       sendRequest()
         .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/blogs"))
-        .then((data) => console.log({data}));
+        .then(() => navigate("/blogs"));
+      // .then((data) => console.log({data}));
     }
   };
 
