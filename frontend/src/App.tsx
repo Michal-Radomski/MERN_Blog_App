@@ -11,6 +11,18 @@ import Header from "./components/Header";
 import UserBlogs from "./components/UserBlogs";
 import {authActions, Dispatch, State} from "./redux/store";
 
+const NotFound = (): JSX.Element => <h1 style={{textAlign: "center", marginTop: "80px"}}>Page Not Found</h1>;
+
+const Home = (): JSX.Element => {
+  const isLoggedIn: boolean = useSelector((state: State) => state.isLoggedIn);
+  // console.log({isLoggedIn});
+  return (
+    <div>
+      {isLoggedIn ? null : <h1 style={{textAlign: "center", marginTop: "80px"}}>LogIn or SignUp to see the blogs...</h1>}
+    </div>
+  );
+};
+
 function App(): JSX.Element {
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
   // console.log({isSignUp});
@@ -30,11 +42,9 @@ function App(): JSX.Element {
       <header>
         <Header isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
       </header>
-      <div>
-        {isLoggedIn ? null : <h1 style={{textAlign: "center", marginTop: "30px"}}>LogIn or SignUp to see the blogs...</h1>}
-      </div>
       <main>
         <Routes>
+          <Route path="/" element={<Home />} />
           {!isLoggedIn ? (
             <Route path="/auth" element={<Auth isSignUp={isSignUp} setIsSignUp={setIsSignUp} />} />
           ) : (
@@ -45,6 +55,7 @@ function App(): JSX.Element {
               <Route path="/blogs/add" element={<AddBlog />} />
             </>
           )}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </>

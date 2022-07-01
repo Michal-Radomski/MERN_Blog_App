@@ -14,8 +14,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/user", userRoutes); //* http://localhost:3000/api/user
-app.use("/api/blog", blogRoutes); //* http://localhost:3000/api/blog
+app.use("/api/user", userRoutes); //* http://localhost:5000/api/user
+app.use("/api/blog", blogRoutes); //* http://localhost:5000/api/blog
 
 mongoose
   .connect(MONGO_URI)
