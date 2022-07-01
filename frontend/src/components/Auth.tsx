@@ -110,8 +110,13 @@ const Auth = ({isSignUp, setIsSignUp}: {isSignUp: boolean; setIsSignUp: (arg0: b
               name="password"
               InputProps={{inputProps: {minLength: 8, maxLength: 20}}}
             />
-            <Button sx={{borderRadius: 3, marginTop: 3}} color="warning" variant="contained" type="submit">
-              Submit
+            <Button
+              sx={{borderRadius: 3, marginTop: 3}}
+              color={!isSignUp ? "success" : "warning"}
+              variant="contained"
+              type="submit"
+            >
+              {!isSignUp ? "LogIn" : "SignUp"}
             </Button>
             <Button sx={{borderRadius: 3, marginTop: 3}} color="info" onClick={() => setIsSignUp(!isSignUp)} type="button">
               Change To {isSignUp ? "LogIn" : "SignUp"}

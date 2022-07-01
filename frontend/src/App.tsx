@@ -30,6 +30,9 @@ function App(): JSX.Element {
       <header>
         <Header isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
       </header>
+      <div>
+        {isLoggedIn ? null : <h1 style={{textAlign: "center", marginTop: "30px"}}>LogIn or SignUp to see the blogs...</h1>}
+      </div>
       <main>
         <Routes>
           {!isLoggedIn ? (

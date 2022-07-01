@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express from "express";
+import express, {Request, Response} from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
@@ -34,9 +34,20 @@ app.get("/", (req, res) => {
   res.send("<h1>Hello World!</h1>");
 });
 
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+
+//   const path = require("path");
+//   app.get("*", (req: Request, res: Response) => {
+//     console.log("req.ip:", req.ip);
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
+
 const port = (process.env.PORT || 5000) as number;
 
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
+  // For testing only
   console.log("Current Time:", new Date().toLocaleTimeString());
 });

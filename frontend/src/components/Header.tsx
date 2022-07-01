@@ -26,8 +26,14 @@ const Header = (props: {isSignUp: boolean; setIsSignUp: (arg0: boolean) => void}
         }}
       >
         <Toolbar>
-          <Typography variant="h4" className={classes.font}>
-            MERN BlogApps
+          <Typography
+            variant="h4"
+            className={classes.font}
+            component={Link}
+            to="/"
+            style={{color: "white", textDecoration: "none"}}
+          >
+            MERN BlogApp
           </Typography>
           {/* //* Render Box if isLoggedIn */}
           {isLoggedIn && (
