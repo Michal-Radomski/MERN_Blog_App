@@ -37,9 +37,12 @@ const Blog = ({
   };
 
   const handleDelete = () => {
-    deleteRequest().then((data) => {
-      console.log(data);
-    });
+    deleteRequest()
+      .then((data) => {
+        // console.log({data});
+      })
+      .then(() => navigate("/"))
+      .then(() => navigate("/blogs"));
   };
 
   return (

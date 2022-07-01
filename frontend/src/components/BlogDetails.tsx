@@ -44,9 +44,9 @@ const BlogDetails = (): JSX.Element => {
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log({inputs});
+    // console.log({inputs});
     sendRequest()
-      .then((data) => console.log({data}))
+      // .then((data) => console.log({data}))
       .then(() => navigate("/myBlogs"));
   };
 

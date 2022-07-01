@@ -1,10 +1,12 @@
 import React from "react";
 import axios from "axios";
 import {Box, Button, InputLabel, TextField, Typography} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 const labelStyles = {mb: 1, mt: 1, fontSize: "24px", fontWeight: "bold"};
 
 const AddBlog = (): JSX.Element => {
+  const navigate = useNavigate();
   const [inputs, setInputs] = React.useState<Blog>({
     title: "",
     description: "",
@@ -36,7 +38,9 @@ const AddBlog = (): JSX.Element => {
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     // console.log({inputs});
-    sendRequest().then((response) => console.log({response}));
+    sendRequest()
+      // .then((response) => console.log({response}))
+      .then(() => navigate("/blogs"));
   };
 
   return (
@@ -55,7 +59,7 @@ const AddBlog = (): JSX.Element => {
           width="75%"
         >
           <Typography fontWeight="bold" padding={3} color="gray" variant="h3" textAlign="center">
-            Post Your Blog
+            Add Your New Blog
           </Typography>
           <InputLabel sx={labelStyles}>Title</InputLabel>
           <TextField name="title" value={inputs.title} margin="normal" variant="outlined" onChange={handleChange} />
