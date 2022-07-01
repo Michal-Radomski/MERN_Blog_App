@@ -19,7 +19,8 @@ const UserBlogs = (): JSX.Element => {
 
   React.useEffect(() => {
     const sendRequest = async () => {
-      const response = await axios.get(`http://localhost:5000/api/blog/user/${userId}`).catch((error) => {
+      //* const response = await axios.get(`http://localhost:5000/api/blog/user/${userId}`).catch((error) => {
+      const response = await axios.get(`/api/blog/user/${userId}`).catch((error) => {
         console.error({error});
       });
       const data = await response?.data;

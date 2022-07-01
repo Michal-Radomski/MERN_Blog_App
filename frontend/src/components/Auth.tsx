@@ -25,7 +25,8 @@ const Auth = ({isSignUp, setIsSignUp}: {isSignUp: boolean; setIsSignUp: (arg0: b
 
   const sendRequest = async (type = "login") => {
     const response = await axios
-      .post(`http://localhost:5000/api/user/${type}`, {
+      //* .post(`http://localhost:5000/api/user/${type}`, {
+      .post(`/api/user/${type}`, {
         name: inputs.name,
         email: inputs.email,
         password: inputs.password,
@@ -41,7 +42,7 @@ const Auth = ({isSignUp, setIsSignUp}: {isSignUp: boolean; setIsSignUp: (arg0: b
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log({inputs});
+    // console.log({inputs});
     if (isSignUp) {
       sendRequest("signup")
         .then((data) => localStorage.setItem("userId", data.user._id))

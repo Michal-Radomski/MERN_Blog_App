@@ -27,7 +27,8 @@ const BlogDetails = (): JSX.Element => {
 
   const sendRequest = async () => {
     const response = await axios
-      .put(`http://localhost:5000/api/blog/update/${id}`, {
+      //* .put(`http://localhost:5000/api/blog/update/${id}`, {
+      .put(`/api/blog/update/${id}`, {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
@@ -49,7 +50,8 @@ const BlogDetails = (): JSX.Element => {
 
   React.useEffect(() => {
     const fetchDetails = async () => {
-      const response = await axios.get(`http://localhost:5000/api/blog/${id}`).catch((err) => {
+      //* const response = await axios.get(`http://localhost:5000/api/blog/${id}`).catch((err) => {
+      const response = await axios.get(`/api/blog/${id}`).catch((err) => {
         console.error({err});
       });
       const data = await response?.data;

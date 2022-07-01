@@ -32,7 +32,8 @@ const Blog = ({
   };
 
   const deleteRequest = async () => {
-    const response = await axios.delete(`http://localhost:5000/api/blog/${id}`).catch((error) => {
+    //* const response = await axios.delete(`http://localhost:5000/api/blog/${id}`).catch((error) => {
+    const response = await axios.delete(`/api/blog/${id}`).catch((error) => {
       console.log({error});
     });
     const data: Blog = await response?.data;

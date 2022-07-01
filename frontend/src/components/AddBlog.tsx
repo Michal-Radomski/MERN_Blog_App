@@ -20,7 +20,8 @@ const AddBlog = (): JSX.Element => {
 
   const sendRequest = async () => {
     const response = await axios
-      .post("http://localhost:5000/api/blog/add", {
+      //* .post("http://localhost:5000/api/blog/add", {
+      .post("/api/blog/add", {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,

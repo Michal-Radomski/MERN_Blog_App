@@ -8,7 +8,8 @@ const Blogs = (): JSX.Element => {
   // console.log({blogs});
 
   const sendRequest = async () => {
-    const response = await axios.get("http://localhost:5000/api/blog").catch((error) => console.log({error}));
+    //* const response = await axios.get("http://localhost:5000/api/blog").catch((error) => console.log({error}));
+    const response = await axios.get("/api/blog").catch((error) => console.log({error}));
     const data = await response?.data;
     return data;
   };
