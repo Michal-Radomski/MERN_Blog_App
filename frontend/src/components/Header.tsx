@@ -11,7 +11,7 @@ const Header = (): JSX.Element => {
   const dispatch: Dispatch = useDispatch();
 
   const isLoggedIn: boolean = useSelector((state: State) => state.isLoggedIn);
-  console.log({isLoggedIn});
+  // console.log({isLoggedIn});
 
   const [value, setValue] = React.useState<number>(0);
   // console.log({value});

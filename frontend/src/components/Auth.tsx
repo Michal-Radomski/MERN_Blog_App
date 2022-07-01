@@ -17,7 +17,7 @@ const Auth = (): JSX.Element => {
   });
 
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false);
-  // console.log({isSignUp});
+  console.log({isSignUp});
 
   const handleChange = (event: {target: {name: string; value: string}}) => {
     setInputs((prevState: Person) => ({
@@ -33,7 +33,10 @@ const Auth = (): JSX.Element => {
         email: inputs.email,
         password: inputs.password,
       })
-      .catch((error: string) => console.log({error}));
+      .catch((error: {message: string}) => {
+        console.log({error});
+        alert(error.message + "\n \nBad login or/and password...");
+      });
 
     const data = await response?.data;
     return data;
