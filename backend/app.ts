@@ -29,20 +29,20 @@ mongoose
     console.log("First Job Done!");
   });
 
-app.get("/", (req, res) => {
-  console.log("req.ip:", req.ip);
-  res.send("<h1>Hello World!</h1>");
-});
+// app.get("/", (req, res) => {
+//   console.log("req.ip:", req.ip);
+//   res.send("<h1>Hello World!</h1>");
+// });
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 
-//   const path = require("path");
-//   app.get("*", (req: Request, res: Response) => {
-//     console.log("req.ip:", req.ip);
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
+  const path = require("path");
+  app.get("*", (req: Request, res: Response) => {
+    console.log("req.ip:", req.ip);
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const port = (process.env.PORT || 5000) as number;
 
