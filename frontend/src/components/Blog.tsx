@@ -5,6 +5,8 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
+import {useStyles} from "./Utils";
+
 const Blog = ({
   title,
   description,
@@ -21,6 +23,8 @@ const Blog = ({
   id: string;
 }) => {
   // console.log({title, isUser});
+
+  const classes = useStyles();
 
   const navigate = useNavigate();
   const handleEdit = () => {
@@ -71,7 +75,12 @@ const Blog = ({
         )}
         <CardHeader
           avatar={
-            <Avatar sx={{backgroundColor: "blue", width: "auto"}} aria-label="avatar" variant="rounded">
+            <Avatar
+              sx={{backgroundColor: "blue", width: "auto"}}
+              aria-label="avatar"
+              variant="rounded"
+              className={classes.font}
+            >
               {userName}
             </Avatar>
           }
@@ -82,7 +91,7 @@ const Blog = ({
         <CardContent>
           <hr />
           <br />
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" className={classes.font}>
             <b>{userName}</b>
             {": "}
             {description}

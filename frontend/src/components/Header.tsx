@@ -4,8 +4,10 @@ import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 import {authActions, Dispatch, State} from "../redux/store";
+import {useStyles} from "./Utils";
 
 const Header = (): JSX.Element => {
+  const classes = useStyles();
   const dispatch: Dispatch = useDispatch();
 
   const isLoggedIn: boolean = useSelector((state: State) => state.isLoggedIn);
@@ -24,7 +26,9 @@ const Header = (): JSX.Element => {
         }}
       >
         <Toolbar>
-          <Typography variant="h4">MERN BlogApps</Typography>
+          <Typography variant="h4" className={classes.font}>
+            MERN BlogApps
+          </Typography>
           {/* //* Render Box if isLoggedIn */}
           {isLoggedIn && (
             <Box display="flex" marginLeft={"auto"} marginRight={"auto"}>
@@ -35,9 +39,9 @@ const Header = (): JSX.Element => {
                 }}
                 textColor="inherit"
               >
-                <Tab component={Link} to="/blogs" label="All Blogs" style={{fontSize: "105%"}} />
-                <Tab component={Link} to="/myBlogs" label="My Blogs" style={{fontSize: "105%"}} />
-                <Tab component={Link} to="/blogs/add" label="Add Blog" style={{fontSize: "105%"}} />
+                <Tab component={Link} to="/blogs" label="All Blogs" style={{fontSize: "105%"}} className={classes.font} />
+                <Tab component={Link} to="/myBlogs" label="My Blogs" style={{fontSize: "105%"}} className={classes.font} />
+                <Tab component={Link} to="/blogs/add" label="Add Blog" style={{fontSize: "105%"}} className={classes.font} />
               </Tabs>
             </Box>
           )}

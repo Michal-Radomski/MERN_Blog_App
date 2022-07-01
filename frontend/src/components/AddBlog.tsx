@@ -3,9 +3,13 @@ import axios from "axios";
 import {Box, Button, InputLabel, TextField, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
+import {useStyles} from "./Utils";
+
 const labelStyles = {mb: 1, mt: 1, fontSize: "24px", fontWeight: "bold"};
 
 const AddBlog = (): JSX.Element => {
+  const classes = useStyles();
+
   const navigate = useNavigate();
   const [inputs, setInputs] = React.useState<Blog>({
     title: "",
@@ -58,21 +62,42 @@ const AddBlog = (): JSX.Element => {
           flexDirection="column"
           width="75%"
         >
-          <Typography fontWeight="bold" padding={3} color="gray" variant="h3" textAlign="center">
+          <Typography fontWeight="bold" padding={3} color="gray" variant="h3" textAlign="center" className={classes.font}>
             Add Your New Blog
           </Typography>
-          <InputLabel sx={labelStyles}>Title</InputLabel>
-          <TextField name="title" value={inputs.title} margin="normal" variant="outlined" onChange={handleChange} />
-          <InputLabel sx={labelStyles}>Description</InputLabel>
+          <InputLabel sx={labelStyles} className={classes.font}>
+            Title
+          </InputLabel>
+          <TextField
+            name="title"
+            value={inputs.title}
+            margin="normal"
+            variant="outlined"
+            onChange={handleChange}
+            className={classes.font}
+          />
+          <InputLabel sx={labelStyles} className={classes.font}>
+            Description
+          </InputLabel>
           <TextField
             name="description"
             value={inputs.description}
             margin="normal"
             variant="outlined"
             onChange={handleChange}
+            className={classes.font}
           />
-          <InputLabel sx={labelStyles}>Image URL</InputLabel>
-          <TextField name="image" value={inputs.image} margin="normal" variant="outlined" onChange={handleChange} />
+          <InputLabel sx={labelStyles} className={classes.font}>
+            Image URL
+          </InputLabel>
+          <TextField
+            name="image"
+            value={inputs.image}
+            margin="normal"
+            variant="outlined"
+            onChange={handleChange}
+            className={classes.font}
+          />
           <Button type="submit" sx={{mt: 2, borderRadius: 4}} variant="contained" color="warning">
             Add Blog
           </Button>
