@@ -70,7 +70,7 @@ const AddBlog = (): JSX.Element => {
           <InputLabel sx={labelStyles}>Image URL</InputLabel>
           <TextField name="image" value={inputs.image} margin="normal" variant="outlined" onChange={handleChange} />
           <Button type="submit" sx={{mt: 2, borderRadius: 4}} variant="contained" color="warning">
-            Submit
+            Add Blog
           </Button>
         </Box>
       </form>

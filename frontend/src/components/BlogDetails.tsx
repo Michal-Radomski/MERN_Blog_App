@@ -3,7 +3,7 @@ import {Box, Button, InputLabel, TextField, Typography} from "@mui/material";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 
-const labelStyles = {mb: 1, mt: 1, fontSize: "20px", fontWeight: "bold"};
+const labelStyles = {mb: 1, mt: 1, fontSize: "20px", fontWeight: "bold", backgroundColor: "orange"};
 
 const BlogDetails = (): JSX.Element => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const BlogDetails = (): JSX.Element => {
       .catch((error) => {
         console.log({error});
       });
-    const data = await response?.data;
+    const data: Blog = await response?.data;
     return data;
   };
 
@@ -85,7 +85,7 @@ const BlogDetails = (): JSX.Element => {
             flexDirection="column"
             width="75%"
           >
-            <Typography fontWeight="bold" padding={3} color="gray" variant="h3" textAlign="center">
+            <Typography fontWeight="bold" padding={3} color="gray" variant="h4" textAlign="center">
               Edit This Blog
             </Typography>
             <InputLabel sx={labelStyles}>Title</InputLabel>

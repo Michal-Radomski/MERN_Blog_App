@@ -3,6 +3,7 @@ import {Box, CardHeader, Card, Avatar, CardMedia, CardContent, Typography, IconB
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const Blog = ({
   title,
@@ -27,7 +28,19 @@ const Blog = ({
     navigate(`/myBlogs/${id}`);
   };
 
-  const handleDelete = (event: any) => {};
+  const deleteRequest = async () => {
+    const response = await axios.delete(`http://localhost:5000/api/blog/${id}`).catch((error) => {
+      console.log({error});
+    });
+    const data: Blog = await response?.data;
+    return data;
+  };
+
+  const handleDelete = () => {
+    deleteRequest().then((data) => {
+      console.log(data);
+    });
+  };
 
   return (
     <React.Fragment>
