@@ -23,7 +23,6 @@ const Blog = ({
   // console.log({title, isUser});
 
   const navigate = useNavigate();
-
   const handleEdit = () => {
     navigate(`/myBlogs/${id}`);
   };

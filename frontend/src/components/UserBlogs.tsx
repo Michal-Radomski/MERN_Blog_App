@@ -44,7 +44,7 @@ const UserBlogs = (): JSX.Element => {
             title={blog.title}
             description={blog.description}
             imageUrl={blog.image}
-            userName={user.name ?? "Undefined"}
+            userName={user?.name ?? "Undefined"}
           />
         ))}
     </div>
