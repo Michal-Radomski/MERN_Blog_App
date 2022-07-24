@@ -45,10 +45,16 @@ const Auth = ({isSignUp, setIsSignUp}: {isSignUp: boolean; setIsSignUp: (arg0: b
     // console.log({inputs});
     if (isSignUp) {
       sendRequest("signup")
-        .then((data) => localStorage.setItem("userId", data.user._id))
-        .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/blogs"));
-      // .then((data) => console.log({data}));
+        //* First version
+        // .then((data) => localStorage.setItem("userId", data.user._id))
+        // .then(() => dispatch(authActions.login()))
+        // .then(() => navigate("/blogs"));
+        // .then((data) => console.log({data}));
+        //* Second version
+        // .then((data) => console.log({data}))
+        .then(() => alert("You will be automatically logged out \n Please log in..."))
+        .then(() => dispatch(authActions.logout()))
+        .then(() => navigate("/"));
     } else {
       sendRequest()
         .then((data) => localStorage.setItem("userId", data.user._id))
